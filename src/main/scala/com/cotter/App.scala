@@ -1,13 +1,12 @@
 package com.cotter
 
 import com.cotter.io.models.SimpleMessages.SimpleIntMap
+
 import scala.collection.JavaConverters._
 
 object App {
 
-  // FIXME where do we keep the state of the histogram???
-
-  def main(args : Array[String]): Unit = ConsumerCreator.run(intToProtobuf, Processor.process(Map[Int, Int]() /* <---STATE GOES HERE */), new ProducerCreator)
+  def main(args : Array[String]): Unit = ConsumerCreator.run(intToProtobuf, Processor.process, new JsonProducerCreator)
 
   def intToProtobuf(frequencies: Map[Int, Int]): SimpleIntMap =
     SimpleIntMap.newBuilder().putAllFrequencies(
