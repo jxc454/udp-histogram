@@ -5,10 +5,11 @@ import java.util.Properties
 
 import com.cotter.io.models.SimpleMessages.{SimpleInt, SimpleIntMap}
 import org.apache.kafka.clients.consumer.{ConsumerConfig, ConsumerRecord, ConsumerRecords, KafkaConsumer}
+import org.apache.logging.log4j.scala.Logging
 
 import scala.collection.JavaConverters._
 
-object ConsumerCreator {
+object ConsumerCreator extends Logging {
   def run(converter: Map[Int, Int] => SimpleIntMap, processor: (Int, Map[Int, Int]) => Map[Int, Int], producer: ProducerCreator): Unit = {
     val props: Properties = new Properties()
     props.put("bootstrap.servers", "localhost:9092")
@@ -27,11 +28,15 @@ object ConsumerCreator {
       val recordsSeq: Seq[ConsumerRecord[String, SimpleInt]] = records.iterator().asScala.toSeq
 
       recordsSeq.foreach(r => {
-        println("processing")
-        state = processor(r.value().getIntValue, state)
+        logger.info("receiving...")
+        logger.debug("received " + r)
 
-        println("producing...")
-        producer.produce("", converter(state))
+        state = processor(r.value().getIntValue, state)
+        val newVal = converter(state)
+
+        logger.info("producing...")
+        producer.produce("", newVal)
+        logger.debug("produced: " + newVal.toString)
       })
     }
   }
