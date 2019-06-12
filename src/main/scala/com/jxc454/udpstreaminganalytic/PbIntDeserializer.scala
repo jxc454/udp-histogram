@@ -1,8 +1,8 @@
-package com.cotter
+package com.jxc454.udpstreaminganalytic
 
 import java.util
 
-import com.cotter.io.models.SimpleMessages.SimpleInt
+import com.jxc454.models.SimpleMessages.SimpleInt
 import org.apache.kafka.common.serialization.Deserializer
 
 class PbIntDeserializer extends Deserializer[SimpleInt] {

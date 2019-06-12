@@ -1,4 +1,4 @@
-package com.cotter
+package com.jxc454.udpstreaminganalytic
 
 object Processor {
   def process(intValue: Int, histo: Map[Int, Int]): Map[Int, Int] = {

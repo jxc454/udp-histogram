@@ -1,9 +1,9 @@
-package com.cotter
+package com.jxc454.udpstreaminganalytic
 
 import java.time.Duration
 import java.util.Properties
 
-import com.cotter.io.models.SimpleMessages.{SimpleInt, SimpleIntMap}
+import com.jxc454.models.SimpleMessages.{SimpleInt, SimpleIntMap}
 import org.apache.kafka.clients.consumer.{ConsumerConfig, ConsumerRecord, ConsumerRecords, KafkaConsumer}
 import org.apache.logging.log4j.scala.Logging
 
