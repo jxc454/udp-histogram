@@ -3,7 +3,7 @@ package com.jxc454.udpstreaminganalytic
 import java.util.Properties
 
 import com.jxc454.models.SimpleMessages.{SimpleInt, SimpleIntMap}
-import com.jxc454.udpstreaminganalytic.serializers.{PbIntDeserializer, PbIntMapSerializer}
+import com.jxc454.udpstreaminganalytic.serializers.{PbIntDeserializer, PbIntSerializer}
 import com.typesafe.config.{Config, ConfigFactory}
 import org.apache.kafka.common.serialization.{Serde, Serdes}
 import org.apache.kafka.streams.{KafkaStreams, StreamsConfig}
@@ -23,8 +23,8 @@ object App extends Logging {
     logger.info(config)
 
     // KStream uses implicit serializers
-    implicit val pbSimpleIntSerde: Serde[SimpleInt] = Serdes.serdeFrom(null, new PbIntDeserializer)
-    implicit val pbSimpleIntMapSerde: Serde[SimpleIntMap] = Serdes.serdeFrom(new PbIntMapSerializer, null)
+    implicit val pbSimpleIntSerde: Serde[SimpleInt] = Serdes.serdeFrom(new PbIntSerializer, new PbIntDeserializer)
+//    implicit val pbSimpleIntMapSerde: Serde[SimpleIntMap] = Serdes.serdeFrom(new PbIntMapSerializer, null)
 
     // KStream config
     val settings: Properties = {
@@ -36,10 +36,13 @@ object App extends Logging {
 
     // define output table
     val builder: StreamsBuilder = new StreamsBuilder()
-    val pbTable: KTable[SimpleInt, SimpleInt] = builder.stream[SimpleInt, SimpleInt](config.getString("inputTopic"))
+    val pbTable: KTable[SimpleInt, SimpleInt] = builder.stream[String, SimpleInt](config.getString("inputTopic"))
       .groupBy((_, v) => v)
       .count
-      .mapValues(i => SimpleInt.newBuilder().setIntValue(i.toInt).build)
+      .mapValues(i => {
+        logger.info(s"analytic mappingValues: $i")
+        SimpleInt.newBuilder().setIntValue(i.toInt).build
+      })
 
     // define output KStream destination
     pbTable.toStream.to(config.getString("outputTopic"))
@@ -52,8 +55,6 @@ object App extends Logging {
     sys.ShutdownHookThread {
       streams.close()
     }
-
-   //    ConsumerCreator.run(intToProtobuf, Processor.process, new JsonProducerCreator)
   }
 
   def intToProtobuf(frequencies: Map[Int, Int]): SimpleIntMap =
