@@ -37,7 +37,10 @@ object App extends Logging {
     // define output table
     val builder: StreamsBuilder = new StreamsBuilder()
     val pbTable: KTable[SimpleInt, SimpleInt] = builder.stream[String, SimpleInt](config.getString("inputTopic"))
-      .groupBy((_, v) => v)
+      .groupBy((k, v) => {
+        logger.info(s"analytic groupBy K, V: $k, $v")
+        v
+      })
       .count
       .mapValues(i => {
         logger.info(s"analytic mappingValues: $i")
