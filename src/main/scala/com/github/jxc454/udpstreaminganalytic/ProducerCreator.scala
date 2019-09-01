@@ -1,9 +1,9 @@
-package com.jxc454.udpstreaminganalytic
+package com.github.jxc454.udpstreaminganalytic
 
 import java.io.{BufferedWriter, File, FileWriter}
 import java.util.Properties
 
-import com.jxc454.models.SimpleMessages.SimpleIntMap
+import com.github.jxc454.models.SimpleMessages.SimpleIntMap
 import org.apache.kafka.clients.producer.{KafkaProducer, ProducerConfig, ProducerRecord}
 import org.apache.logging.log4j.scala.Logging
 import org.json4s.NoTypeHints

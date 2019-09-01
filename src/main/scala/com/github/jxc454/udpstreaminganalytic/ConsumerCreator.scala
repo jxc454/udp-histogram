@@ -1,9 +1,9 @@
-package com.jxc454.udpstreaminganalytic
+package com.github.jxc454.udpstreaminganalytic
 
 import java.time.Duration
 import java.util.Properties
 
-import com.jxc454.models.SimpleMessages.{SimpleInt, SimpleIntMap}
+import com.github.jxc454.models.SimpleMessages.{SimpleInt, SimpleIntMap}
 import org.apache.kafka.clients.consumer.{ConsumerConfig, ConsumerRecord, ConsumerRecords, KafkaConsumer}
 import org.apache.logging.log4j.scala.Logging
 

@@ -1,6 +1,6 @@
-package com.jxc454.udpstreaminganalytic
+package com.github.jxc454.udpstreaminganalytic
 
-import com.jxc454.models.SimpleMessages.SimpleInt
+import com.github.jxc454.models.SimpleMessages.SimpleInt
 import org.apache.kafka.clients.consumer.{ConsumerConfig, ConsumerRecord}
 import org.apache.kafka.common.serialization.StringDeserializer
 import org.apache.spark.SparkConf

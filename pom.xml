@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.cotter</groupId>
+  <groupId>com.github.jxc454</groupId>
   <artifactId>udpstreaminganalytic</artifactId>
   <version>1.0-SNAPSHOT</version>
   <name>${project.artifactId}</name>
@@ -95,9 +95,15 @@
       <version>3.6.2</version>
     </dependency>
     <dependency>
-      <groupId>com.jxc454</groupId>
-      <artifactId>models</artifactId>
-      <version>1.0-SNAPSHOT</version>
+      <groupId>com.github.jxc454</groupId>
+      <artifactId>udpmodels</artifactId>
+      <version>1.0.1</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java -->
+    <dependency>
+      <groupId>com.google.protobuf</groupId>
+      <artifactId>protobuf-java</artifactId>
+      <version>3.9.1</version>
     </dependency>
   </dependencies>
 
@@ -161,7 +167,7 @@
             <configuration>
               <transformers>
                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                  <mainClass>com.cotter.App</mainClass>
+                  <mainClass>com.github.jxc454.App</mainClass>
                 </transformer>
               </transformers>
             </configuration>

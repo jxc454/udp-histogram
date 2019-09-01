@@ -1,8 +1,8 @@
-package com.jxc454.udpstreaminganalytic
+package com.jxc454.udpstreaminganalytic.serializers
 
 import java.util
 
-import com.jxc454.models.SimpleMessages.SimpleIntMap
+import com.github.jxc454.models.SimpleMessages.SimpleIntMap
 import org.apache.kafka.common.serialization.Serializer
 
 class PbIntMapSerializer extends Serializer[SimpleIntMap] {

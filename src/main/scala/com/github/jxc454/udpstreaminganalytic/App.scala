@@ -1,6 +1,6 @@
-package com.jxc454.udpstreaminganalytic
+package com.github.jxc454.udpstreaminganalytic
 
-import com.jxc454.models.SimpleMessages.SimpleIntMap
+import com.github.jxc454.models.SimpleMessages.SimpleIntMap
 
 import scala.collection.JavaConverters._
 
