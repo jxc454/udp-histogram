@@ -1,14 +1,11 @@
 package com.github.jxc454.udphistogram
 
-import com.github.jxc454.models.SimpleMessages.SimpleIntMap
-
-import scala.collection.JavaConverters._
+import com.redis._
 
 object App {
+  val r = new RedisClient("localhost", 6379)
 
-  def main(args : Array[String]): Unit = ConsumerCreator.run(intToProtobuf, Processor.process, new JsonProducerCreator)
+  def main(args : Array[String]): Unit = Consumer.run(incrementRedis(r))
 
-  def intToProtobuf(frequencies: Map[Int, Int]): SimpleIntMap =
-    SimpleIntMap.newBuilder().putAllFrequencies(
-      frequencies.map{ case (k, v) => int2Integer(k) -> int2Integer(v) }.asJava).build
+  def incrementRedis(r: RedisClient)(key: Int): Unit = r.hincrby("histogram", key.toString, 1)
 }

@@ -105,6 +105,12 @@
       <artifactId>protobuf-java</artifactId>
       <version>3.9.1</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.redis/scala-redis -->
+    <dependency>
+      <groupId>org.redis</groupId>
+      <artifactId>scala-redis_2.11</artifactId>
+      <version>0.0.25</version>
+    </dependency>
   </dependencies>
 
   <build>

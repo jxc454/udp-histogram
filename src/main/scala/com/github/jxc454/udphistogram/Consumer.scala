@@ -3,14 +3,14 @@ package com.github.jxc454.udphistogram
 import java.time.Duration
 import java.util.Properties
 
-import com.github.jxc454.models.SimpleMessages.{SimpleInt, SimpleIntMap}
+import com.github.jxc454.models.SimpleMessages.SimpleInt
 import org.apache.kafka.clients.consumer.{ConsumerConfig, ConsumerRecord, ConsumerRecords, KafkaConsumer}
 import org.apache.logging.log4j.scala.Logging
 
 import scala.collection.JavaConverters._
 
-object ConsumerCreator extends Logging {
-  def run(converter: Map[Int, Int] => SimpleIntMap, processor: (Int, Map[Int, Int]) => Map[Int, Int], producer: ProducerCreator): Unit = {
+object Consumer extends Logging {
+  def run(action: Int => Unit): Unit = {
     val props: Properties = new Properties()
     props.put("bootstrap.servers", "localhost:9092")
     props.put("group.id", "streaming-analytic")
@@ -19,8 +19,6 @@ object ConsumerCreator extends Logging {
 
     val kafkaConsumer: KafkaConsumer[String, SimpleInt] = new KafkaConsumer(props)
     kafkaConsumer.subscribe(Seq("protobuf").asJava)
-
-    var state: Map[Int, Int] = Map[Int, Int]()
 
     while (true) {
       val records: ConsumerRecords[String, SimpleInt] = kafkaConsumer.poll(Duration.ofSeconds(1))
@@ -31,12 +29,7 @@ object ConsumerCreator extends Logging {
         logger.info("receiving...")
         logger.debug("received " + r)
 
-        state = processor(r.value().getIntValue, state)
-        val newVal = converter(state)
-
-        logger.info("producing...")
-        producer.produce("", newVal)
-        logger.debug("produced: " + newVal.toString)
+        action(r.value().getIntValue)
       })
     }
   }
