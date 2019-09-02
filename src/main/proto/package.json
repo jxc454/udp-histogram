@@ -1,0 +1,22 @@
+{
+  "name": "@jxc454/udp-histogram",
+  "version": "1.0.0",
+  "description": "Histogram",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jxc454/udp-histogram.git"
+  },
+  "keywords": [
+    "histogram"
+  ],
+  "author": "jxc454",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jxc454/udp-histogram/issues"
+  },
+  "homepage": "https://github.com/jxc454/udp-histogram#readme"
+}
