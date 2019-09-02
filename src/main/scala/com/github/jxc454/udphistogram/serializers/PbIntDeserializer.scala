@@ -1,4 +1,4 @@
-package com.github.jxc454.udpstreaminganalytic.serializers
+package com.github.jxc454.udphistogram.serializers
 
 import java.util
 

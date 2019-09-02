@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package histogram;
+
+option java_package = "com.github.jxc454.udphistogram";
+option java_outer_classname = "Histogram";
+
+service UdpHistogram {
+    rpc GetHistogram (HistogramRequest) returns (HistogramResponse) {}
+}
+
+message HistogramRequest {
+    Constraint constraint = 1;
+}
+
+message HistogramResponse {
+    map<int64, int64> histogram = 1;
+    Constraint constraint = 2;
+}
+
+message Constraint {
+    int32 x_min = 1;
+    int32 x_max = 2;
+    int32 y_min = 3;
+    int32 y_max = 4;
+}

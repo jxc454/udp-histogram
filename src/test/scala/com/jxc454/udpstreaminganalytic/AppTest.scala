@@ -1,4 +1,4 @@
-package com.jxc454.udpstreaminganalytic
+package com.github.jxc454.udphistogram
 
 import org.scalatest._
 

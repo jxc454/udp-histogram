@@ -1,4 +1,4 @@
-package com.github.jxc454.udpstreaminganalytic
+package com.github.jxc454.udphistogram
 
 import java.time.Duration
 import java.util.Properties

@@ -1,4 +1,4 @@
-package com.github.jxc454.udpstreaminganalytic
+package com.github.jxc454.udphistogram
 
 object Processor {
   def process(intValue: Int, histo: Map[Int, Int]): Map[Int, Int] = {

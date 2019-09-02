@@ -1,4 +1,4 @@
-package com.github.jxc454.udpstreaminganalytic
+package com.github.jxc454.udphistogram
 
 import java.io.{BufferedWriter, File, FileWriter}
 import java.util.Properties
